@@ -1,39 +1,32 @@
 # ClaimsMmanagement
 
 #### 介绍
-一个基于c++的索赔管理系统
-数据库mysql
-前端页面GUI
+
+一个基于 c++的索赔管理系统
+数据库 mysql
+前端页面 GUI
 
 #### 软件架构
-软件架构说明
 
+软件架构说明
 
 #### 安装教程
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
-
 #### 使用说明
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1.本项目使用 vscode 开发
+因此注意在导入 mysql 的依赖时注意导入文件路径
+如果是使用 code Runner 插件右击运行
+可参考配置以下 setting.json
+"code-runner.executorMap"：{
+"cpp": "cd $dir && g++ $fileName -I \"C:/Program Files/MySQL/MySQL Server 5.7/include\" -L \"C:/Program Files/MySQL/MySQL Server 5.7/lib\" -l mysql  -o  $fileNameWithoutExt && $dir$fileNameWithoutExt",
+"objective-c": "cd $dir && gcc -framework Cocoa $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",}
+以上配置为重点部分(文件路径请写自己 mysql 安装路径下的文件)其他省略
+注意由于本项目是 c++因此 main.cpp 后缀是.cpp 结尾
+因此请注意 c++语法
+taks.json 配置可参考我的
+配置
 
 #### 参与贡献
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
-
-
 #### 特技
-
-1.  使用 Readme\_XXX.md 来支持不同的语言，例如 Readme\_en.md, Readme\_zh.md
-2.  Gitee 官方博客 [blog.gitee.com](https://blog.gitee.com)
-3.  你可以 [https://gitee.com/explore](https://gitee.com/explore) 这个地址来了解 Gitee 上的优秀开源项目
-4.  [GVP](https://gitee.com/gvp) 全称是 Gitee 最有价值开源项目，是综合评定出的优秀开源项目
-5.  Gitee 官方提供的使用手册 [https://gitee.com/help](https://gitee.com/help)
-6.  Gitee 封面人物是一档用来展示 Gitee 会员风采的栏目 [https://gitee.com/gitee-stars/](https://gitee.com/gitee-stars/)
