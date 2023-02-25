@@ -1,12 +1,21 @@
 #include <iostream>
 #include <WinSock.h> //一定要包含这个
-#include <time.h>
+// #include <time.h>
 #include <string.h>
 #include "C:/Program Files/MySQL/MySQL Server 5.7/include/mysql.h"
 using namespace std;
 // #pragma comment(lib, "libmysql")
-extern MYSQL my_sql;
-extern char *service_name, *danpan_id, *man, *price, *time;
+void insertDate();
+MYSQL my_sql;
+// char *service_name, *danpan_id, *man, *price, *time;
+struct suopei
+{
+    char service_name[20];
+    char danpan_id[20];
+    char man[20];
+    char price[20];
+    char time[20];
+};
 
 int main()
 {
@@ -40,8 +49,6 @@ int main()
         default:
             printf("Default case\n");
         }
-
-        insertDate();
     }
     // 4. 关闭MySQL
     // free(result);
@@ -54,9 +61,38 @@ void insertDate()
 
 {
 
-    printf("insert:");
-
-    string sql = "insert into suopei values(null,\'\',198791,  \' 王五\' , \'42352\', \'2020-06-12\')";
+    printf("insert:\n");
+    struct suopei sp;
+    // 1
+    printf("服务站名称:");
+    scanf("%s", sp.service_name);
+    printf("\n");
+    printf("底盘号:");
+    scanf("%s", sp.danpan_id);
+    printf("\n");
+    printf("审核人:");
+    scanf("%s", sp.man);
+    printf("\n");
+    printf("索赔金额:");
+    scanf("%s", sp.price);
+    printf("\n");
+    printf("索赔日期:");
+    scanf("%s", sp.time);
+    printf("服务站名称:%s 底盘号:%s 审核人:%s 索赔金额:%s 索赔日期:%s\n", sp.service_name, sp.danpan_id, sp.man, sp.price, sp.time);
+    string s(sp.service_name);
+    cout << s << endl;
+    string sql = "insert into suopei values(null,";
+    sql = sql + "'" + s + "',";
+    s = sp.danpan_id;
+    sql = sql + "'" + s + "',";
+    s = sp.man;
+    sql = sql + "'" + s + "',";
+    s = sp.price;
+    sql = sql + "'" + s + "',";
+    s = sp.time;
+    sql = sql + "'" + s + "'";
+    sql += ")";
+    cout << sql << endl;
     int res = mysql_query(&my_sql, sql.c_str());
     if (res == 0)
     {
