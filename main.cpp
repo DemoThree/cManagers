@@ -254,7 +254,7 @@ void queryDate()
         result_row = mysql_fetch_row(res);
         for (int j = 0; j < colnum; j++)
         {
-            printf("\t%s\t", result_row[j]);
+            printf("\t%s", result_row[j]);
         }
         printf("\n");
     }
