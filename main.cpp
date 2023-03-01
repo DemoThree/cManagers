@@ -6,6 +6,8 @@
 #include <cstdio>
 #include <graphics.h>
 #include <conio.h>
+
+// #include "Gui.cpp"
 #include "C:/Program Files/MySQL/MySQL Server 5.7/include/mysql.h"
 using namespace std;
 // #pragma comment(lib, "libmysql")
@@ -50,20 +52,6 @@ MYSQL_RES *res;                            // 查询结果集
 MYSQL_ROW row;                             // 二维数组，存放数据
 MYSQL_ROW result_row; /*按行返回查询信息*/ // typedef char** MYSQL_ROW
 char column[30][40];
-// char *service_name, *danpan_id, *man, *price, *time;
-// 时间结构体
-// struct tm
-// {
-//     int tm_sec;   // 秒（0~61）
-//     int tm_min;   // 分（0~59）
-//     int tm_hour;  // 小时（0~23)
-//     int tm_mday;  // 日(1~31)
-//     int tm_mon;   // 月份(0~11)
-//     int tm_year;  // 年，从1970年至今经过的年数
-//     int tm_wday;  // 星期:(0~6)
-//     int tm_yday;  // 天数(0~365)
-//     int tm_isdst; // 夏令时 daylight-saving time
-// };
 
 struct suopei
 {
@@ -178,6 +166,11 @@ void Menu()
 
             Menu();
             break;
+        case 5:
+
+            printf("5.GUI界面\n");
+            Page();
+            break;
         default:
             printf("Default case\n");
         }
@@ -278,7 +271,6 @@ void updateDate()
         cout << "delete false" + mysql_errno(&my_sql) << endl;
     }
 }
-
 void queryDate()
 {
     int row, colnum;
@@ -397,4 +389,83 @@ void queryDate()
     fclose(fp);
     fclose(fp2);
     mysql_free_result(res); // 释放结果集
+}
+void Page()
+{
+    // 窗口大小
+    initgraph(760, 760);
+    // 鼠标操作1
+    MOUSEMSG m1;
+
+    cleardevice();
+    IMAGE picture1;
+    loadimage(&picture1, "./firstbc.jpg", 760, 760);
+    putimage(0, 0, &picture1);
+    setbkmode(TRANSPARENT);
+
+    setfillcolor(GREEN);
+
+    // 大标题
+    char FirstTitle[20] = {"汽车索赔管理系统"};
+    settextstyle(60, 0, "黑体");
+    outtextxy(150, 100, FirstTitle);
+
+    // 三个选项的背景
+    fillrectangle(230, 445, 560, 490);
+    fillrectangle(230, 505, 560, 550);
+    fillrectangle(230, 565, 560, 610);
+
+    setbkmode(TRANSPARENT);
+
+    // 三个选项的文字
+    settextstyle(40, 0, "黑体");
+
+    // 三个选项
+    char FirstSelect1[20] = {"管理员操作界面"};
+    char FirstSelect2[20] = {"普通用户操作界面"};
+    char FirstSelect3[20] = {"退出程序"};
+    outtextxy(240, 450, FirstSelect1);
+    outtextxy(240, 510, FirstSelect2);
+    outtextxy(240, 570, FirstSelect3);
+    // 进入主界面选项操作界面
+    while (1)
+    {
+        m1 = GetMouseMsg();                                           // 获取鼠标操作
+        if (m1.x >= 230 && m1.x <= 560 && m1.y >= 445 && m1.y <= 490) // 管理员界面
+        {
+            setlinecolor(RED);
+            rectangle(230, 445, 560, 490);
+            if (m1.uMsg == WM_LBUTTONDOWN)
+            {
+                // 加入管理员登录
+                // AdminSignIn();
+            }
+        }
+        else if (m1.x >= 230 && m1.x <= 560 && m1.y >= 505 && m1.y <= 550) // 普通用户界面
+        {
+            setlinecolor(RED);
+            rectangle(230, 505, 560, 550);
+            if (m1.uMsg == WM_LBUTTONDOWN)
+            {
+                cleardevice();
+                        }
+        }
+        else if (m1.x >= 230 && m1.x <= 560 && m1.y >= 565 && m1.y <= 610) // 退出
+        {
+            setlinecolor(RED);
+            rectangle(230, 565, 560, 610);
+            if (m1.uMsg == WM_LBUTTONDOWN)
+            {
+                exit(0);
+            }
+        }
+        // 鼠标不在上面悬停
+        else
+        {
+            setlinecolor(WHITE);
+            rectangle(230, 445, 560, 490);
+            rectangle(230, 505, 560, 550);
+            rectangle(230, 565, 560, 610);
+        }
+    }
 }
