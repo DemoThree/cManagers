@@ -36,7 +36,7 @@ int token = 0;
 // 初始化文件指针
 
 FILE *fp = NULL;
-
+FILE *fp2 = NULL;
 string s;
 
 // 登陆时的账号
@@ -332,7 +332,7 @@ void queryDate()
             }
             printf("\n");
         }
-        printf("是否导出数据到excel? y/n:");
+        cout << "是否导入excel:y/n" << endl;
         cin >> s;
         if (/* condition */ s == "y")
         {
@@ -340,12 +340,45 @@ void queryDate()
             Sleep(1000); // 休眠100毫秒
             /* code */
             fp = fopen("test.txt", "w");
+            fp2 = fopen("test.xls", "w");
             // 没有指定文件路径，则默认为当前工作目录
 
             for (int i = 0; i < colnum; ++i)
             {
                 printf("%s", column[i]);
-                fprintf(fp, "%s\t", column[i]);
+                fprintf(fp, "%s", column[i]);
+                fprintf(fp2, "%s\t", column[i]);
+
+                for (int z = 0; z < 21 - strlen(column[i]); z++)
+                {
+                    /* code */
+                    fprintf(fp, " ");
+                }
+            }
+            fprintf(fp, "\n");
+            fprintf(fp2, "\n");
+            string sql = "select * from suopei";
+            mysql_query(&my_sql, sql.c_str());
+            // 获取查询结果集
+            res = mysql_store_result(&my_sql);
+            row = mysql_num_rows(res);
+            colnum = mysql_num_fields(res);
+            for (int i = 1; i < row + 1; i++)
+            {
+                // 一行数据
+                result_row = mysql_fetch_row(res);
+                for (int j = 0; j < colnum; j++)
+                {
+                    fprintf(fp, "%s", result_row[j]);
+                    fprintf(fp2, "%s\t", result_row[j]);
+                    for (int z = 0; z < 21 - strlen(result_row[j]); z++)
+                    {
+                        /* code */
+                        fprintf(fp, " ");
+                    }
+                }
+                fprintf(fp, "\n");
+                fprintf(fp2, "\n");
             }
 
             cout << "导入成功！！！！！" << endl;
@@ -362,6 +395,6 @@ void queryDate()
 
     // fp 为文件指针，关闭文件代码如下：
     fclose(fp);
-
+    fclose(fp2);
     mysql_free_result(res); // 释放结果集
 }
