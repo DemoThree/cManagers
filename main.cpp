@@ -143,7 +143,7 @@ void Menu()
     }
     else
     {
-        system("cls");
+
         cout << "数据库连接:success" << endl;
         // 设置编码格式
         printf("设置编码格式\n");
@@ -344,9 +344,8 @@ void queryDate()
 
             for (int i = 0; i < colnum; ++i)
             {
-                // strcpy(column[i], mysql_fetch_field(res)->name);
-                // printf("%s", column[i]);
-                // fprintf(fp, "%s", );
+                printf("%s", column[i]);
+                fprintf(fp, "%s\t", column[i]);
             }
 
             cout << "导入成功！！！！！" << endl;
