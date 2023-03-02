@@ -3,7 +3,8 @@
     "files.associations": {
         "*.vue": "vue",
         "ostream": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "typeinfo": "cpp"
     }
 
 }

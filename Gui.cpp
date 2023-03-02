@@ -22,6 +22,7 @@ typedef struct Student
     char s_Math[64];    // 数
     char s_English[64]; // 英
     double s_SumScore;  // 总分
+    struct student *next;
 } Student;
 
 // 创建学生结构体数组
