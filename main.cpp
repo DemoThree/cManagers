@@ -246,7 +246,7 @@ void insertDate()
     }
     else
     {
-        cout << "insert false" << endl;
+        cout << "insert false" + mysql_errno(&my_sql) << endl;
     }
 }
 void deleteDate()
@@ -352,6 +352,9 @@ void queryDate()
         cin >> s;
         if (/* condition */ s == "y")
         {
+            printf("创建文件中....\n");
+            remove("test.csv");
+            Sleep(3000);
             printf("导入中....\n");
             Sleep(1000); // 休眠100毫秒
             /* code */
@@ -493,7 +496,9 @@ void Page()
             rectangle(230, 565, 560, 610);
             if (m1.uMsg == WM_LBUTTONDOWN)
             {
-                exit(0);
+                // exit(0);
+                closegraph();
+                Menu();
             }
         }
         // 鼠标不在上面悬停
@@ -731,7 +736,7 @@ struct suopei2 *loadFile()
 
             while (tokens != NULL)
             {
-                // printf("Token: %s%d\n", tokens, x);
+                printf("Token: %s%d\n", tokens, x);
                 switch (x)
                 {
                 case 1:
@@ -790,10 +795,11 @@ void S1mplePrint()
 
     head = loadFile();
     struct suopei2 *p3 = head;
-    // while (p3 != NULL)
+    // struct suopei2 *p4 = head;
+    // while (p4 != NULL)
     // {
-    //     printf("%s\t%s\n", p3->id, p3->service_name);
-    //     p3 = p3->next;
+    //     printf("%s\t%s\n", p4->id, p4->service_name);
+    //     p4 = p->next;
     // }
 
     // // 如果为空就不往下执行;/
@@ -807,31 +813,25 @@ void S1mplePrint()
     for (int q = 1; q <= Nums; q++)
     {
 
-        // 顺序
+        // // 顺序
         settextstyle(30, 0, "黑体");
 
         // id
-        outtextxy(0, 100 + 40 * q, p3->id);
+        outtextxy(0, 40 + 40 * q, p3->id);
 
         // service_name.
-        outtextxy(50, 100 + 40 * q, p3->service_name);
+        outtextxy(50, 40 + 40 * q, p3->service_name);
 
         // danpan_id
-        outtextxy(250, 100 + 40 * q, p3->danpan_id);
+        outtextxy(250, 40 + 40 * q, p3->danpan_id);
 
         // man
-        outtextxy(400, 100 + 40 * q, p3->man);
+        outtextxy(400, 40 + 40 * q, p3->man);
         // price
-        outtextxy(500, 100 + 40 * q, p3->price);
+        outtextxy(500, 40 + 40 * q, p3->price);
         // time
-        outtextxy(600, 100 + 40 * q, p3->time);
+        outtextxy(600, 40 + 40 * q, p3->time);
         p3 = p3->next;
-        // if (strlen(StuArry[q - 1].s_Name) != 0)
-        // {
-        //     outtextxy(0, 40 + 40 * q, Nums);
-        //     char SuSo[20];
-        //     sprintf(SuSo, "%.2f", StuArry[q - 1].s_SumScore); // 小数点后保留两位
-        //     outtextxy(600, 40 + 40 * q, SuSo);
-        // }
     }
+    Nums = 0;
 }
