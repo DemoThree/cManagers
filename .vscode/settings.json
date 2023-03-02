@@ -4,7 +4,8 @@
         "*.vue": "vue",
         "ostream": "cpp",
         "iostream": "cpp",
-        "typeinfo": "cpp"
+        "typeinfo": "cpp",
+        "codecvt": "cpp"
     }
 
 }

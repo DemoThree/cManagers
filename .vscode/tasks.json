@@ -39,18 +39,22 @@
         "label": "task g++",
         "command": "C:\\Program Files\\mingw64\\bin\\g++.exe",	/*修改成自己bin目录下的g++.exe，这里的路径和电脑里复制的文件目录有一点不一样，这里是两个反斜杠\\*/
         "args": [
+            
             "-g",
+            
             "${file}",
             "-L",
             "C:\\Program Files\\MySQL\\MySQL Server 5.7\\lib",//自己电脑上mysql的路径
             "-lmysql",
             "-o",
+            
             "${fileDirname}\\${fileBasenameNoExtension}.exe",
             
             "-I",
             "C:\\GiteeProjiect",      /*修改成自己放c/c++项目的文件夹，这里的路径和电脑里复制的文件目录有一点不一样，这里是两个反斜杠\\*/
             "-std=c++17",
             "-leasyx",
+            
         ],
         "options": {
             "cwd": "C:\\Program Files\\mingw64\\bin"	/*修改成自己bin目录，这里的路径和电脑里复制的文件目录有一点不一样，这里是两个反斜杠\\*/

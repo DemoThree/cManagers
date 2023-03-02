@@ -7,6 +7,7 @@
 #include <graphics.h>
 #include <conio.h>
 
+#include <codecvt>
 // #include "Gui.cpp"
 #include "C:/Program Files/MySQL/MySQL Server 5.7/include/mysql.h"
 
@@ -17,6 +18,7 @@ int FlagAI = -1;
 // 查询找到页面跳转标识
 int FlagFPT = -1;
 int Nums = 0;
+// char header[3] = {0xef, 0xbb, 0xbf};
 void insertDate();
 
 void deleteDate();
@@ -32,7 +34,7 @@ void AdminPage();
 void Page();
 void ShowAllInfor();
 void login();
-
+void S1mplePrint();
 char *timer(char str[]);
 
 // 读写文操作
@@ -87,7 +89,7 @@ struct suopei2
 void login()
 {
 
-    cout << "请输入账号:" << endl;
+    cout << "请输入账号：" << endl;
     cin >> username;
     cout << "请输入密码:" << endl;
     cin >> password;
@@ -202,7 +204,7 @@ void Menu()
     mysql_close(&my_sql);
 };
 ;
-void S1mplePrint();
+
 void insertDate()
 
 {
@@ -281,12 +283,12 @@ void updateDate()
     cin >> s;
     cout << "输入的值为：" + s << endl;
     sql = sql + " where id = '" + s + "'";
-    cout << sql << endl;
+    cout << "sql:" + sql << endl;
 
     int res = mysql_query(&my_sql, sql.c_str());
     if (res == 0)
     {
-        cout << "delete succeeded" << endl;
+        cout << "update succeeded" << endl;
     }
     else
     {
@@ -708,12 +710,15 @@ struct suopei2 *loadFile()
     struct suopei2 *p1 = NULL;
     struct suopei2 *p2 = NULL;
     struct suopei2 *head = NULL;
+    // 判断是否有文件
+
     if ((fp = fopen("test.csv", "r")) != NULL)
     {
 
         char row[80];
         char *tokens;
         int x = 1;
+        // fget从csv文件读取一行
         while (fgets(row, 80, fp) != NULL)
         {
             p1 = (struct suopei2 *)malloc(sizeof(struct suopei2));
@@ -721,6 +726,7 @@ struct suopei2 *loadFile()
             x = 1;
 
             // printf("Row: %s", row);
+            // 通过“，”分割数据
             tokens = strtok(row, ",");
 
             while (tokens != NULL)
@@ -734,7 +740,6 @@ struct suopei2 *loadFile()
                     break;
                 case 2:
                     strcpy(p1->service_name, tokens);
-
                     break;
                 case 3:
                     strcpy(p1->danpan_id, tokens);
@@ -759,6 +764,7 @@ struct suopei2 *loadFile()
                 tokens = strtok(NULL, ",");
                 x++;
             }
+
             if (i == 0)
             {
                 head = p1;
@@ -783,12 +789,11 @@ void S1mplePrint()
 {
 
     head = loadFile();
-    // struct suopei2 *p1 = head;
-
-    // while (p1 != NULL)
+    struct suopei2 *p3 = head;
+    // while (p3 != NULL)
     // {
-    //     printf("%s\t%s\n", p1->id, p1->service_name);
-    //     p1 = p1->next;
+    //     printf("%s\t%s\n", p3->id, p3->service_name);
+    //     p3 = p3->next;
     // }
 
     // // 如果为空就不往下执行;/
@@ -806,23 +811,21 @@ void S1mplePrint()
         settextstyle(30, 0, "黑体");
 
         // id
-        outtextxy(0, 40 + 40 * q, head[q - 1].id);
-        // service_name
-        outtextxy(50, 40 + 40 * q, head[q - 1].service_name);
+        outtextxy(0, 100 + 40 * q, p3->id);
+
+        // service_name.
+        outtextxy(50, 100 + 40 * q, p3->service_name);
+
         // danpan_id
-        outtextxy(250, 40 + 40 * q, head[q - 1].danpan_id);
+        outtextxy(250, 100 + 40 * q, p3->danpan_id);
+
         // man
-        outtextxy(400, 40 + 40 * q, head[q - 1].man);
+        outtextxy(400, 100 + 40 * q, p3->man);
         // price
-        outtextxy(500, 40 + 40 * q, head[q - 1].price);
+        outtextxy(500, 100 + 40 * q, p3->price);
         // time
-        outtextxy(600, 40 + 40 * q, head[q - 1].time);
-        //       outtextxy(0, 0, "id");
-        // outtextxy(50, 0, "servise_name");
-        // outtextxy(250, 0, "danpan_id");
-        // outtextxy(400, 0, "man");
-        // outtextxy(500, 0, "price");
-        // outtextxy(600, 0, "time");
+        outtextxy(600, 100 + 40 * q, p3->time);
+        p3 = p3->next;
         // if (strlen(StuArry[q - 1].s_Name) != 0)
         // {
         //     outtextxy(0, 40 + 40 * q, Nums);
