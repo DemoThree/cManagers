@@ -16,6 +16,7 @@ using namespace std;
 int FlagAI = -1;
 // 查询找到页面跳转标识
 int FlagFPT = -1;
+int Nums = 0;
 void insertDate();
 
 void deleteDate();
@@ -96,13 +97,7 @@ void login()
 
 int main(int argc, char *argv[])
 {
-    head = loadFile();
-    struct suopei2 *p1 = head;
-    while (p1 != NULL)
-    {
-        printf("%s\t%s\n", p1->id, p1->service_name);
-        p1 = p1->next;
-    }
+
     Menu();
     return 0;
 };
@@ -207,6 +202,7 @@ void Menu()
     mysql_close(&my_sql);
 };
 ;
+void S1mplePrint();
 void insertDate()
 
 {
@@ -636,61 +632,24 @@ void ShowAllInfor()
     // 表头文字部分
     setbkmode(TRANSPARENT);
     settextstyle(30, 0, "黑体");
-    outtextxy(0, 0, "id");
-    outtextxy(50, 0, "servise_name");
-    outtextxy(250, 0, "danpan_id");
-    outtextxy(400, 0, "man");
-    outtextxy(500, 0, "price");
-    outtextxy(600, 0, "time");
+    // outtextxy(0, 0, "id");
+    // outtextxy(50, 0, "servise_name");
+    // outtextxy(250, 0, "danpan_id");
+    // outtextxy(400, 0, "man");
+    // outtextxy(500, 0, "price");
+    // outtextxy(600, 0, "time");
 
     outtextxy(700, 300, "排序方式");
     outtextxy(700, 400, "按金额排序");
-    // outtextxy(700, 200, "按数学排序");
-    // outtextxy(700, 300, "按英语排序");
-    // outtextxy(700, 400, "按总分排序");
 
     outtextxy(740, 600, "返回");
 
-    // S1mplePrint(); // 默认只是单纯的打印
+    S1mplePrint();
 
     while (1)
     {
         SA = GetMouseMsg();
-        //     if (SA.x >= 690 && SA.x <= 850 && SA.y >= 90 && SA.y <= 140)
-        //     {
-        //         // 按语文排
-        //         setlinecolor(RED);
-        //         rectangle(690, 90, 850, 140);
-        //         if (SA.uMsg == WM_LBUTTONDOWN)
-        //         {
-        //             // SortAcChinese();
-        //             // 刷新重新载入
-        //             ShowAllInfor();
-        //         }
-        //     }
-        //     else if (SA.x >= 690 && SA.x <= 850 && SA.y >= 190 && SA.y <= 240)
-        //     {
-        //         // 按数学排
-        //         setlinecolor(RED);
-        //         rectangle(690, 190, 850, 240);
-        //         if (SA.uMsg == WM_LBUTTONDOWN)
-        //         {
-        //             // SortAcMath();
-        //             // 刷新重新载入
-        //             ShowAllInfor();
-        //         }
-        //     }
-        // if (SA.x >= 690 && SA.x <= 850 && SA.y >= 290 && SA.y <= 340)
-        // {
-        //     setlinecolor(RED);
-        //     rectangle(690, 290, 850, 340);
-        //     if (SA.uMsg == WM_LBUTTONDOWN)
-        //     {
-        //         // SortAcEnglish();
-        //         // 刷新重新载入
-        //         ShowAllInfor();
-        //     }
-        // }
+
         if (SA.x >= 690 && SA.x <= 850 && SA.y >= 390 && SA.y <= 440)
         {
 
@@ -811,6 +770,7 @@ struct suopei2 *loadFile()
                 p2->next = p1;
                 p2 = p1;
             }
+            Nums++;
         }
 
         fclose(fp);
@@ -822,43 +782,53 @@ struct suopei2 *loadFile()
 void S1mplePrint()
 {
 
-    // // // 如果为空就不往下执行;/
-    // if (NowStudentNums == 0)
-    // {
+    head = loadFile();
+    // struct suopei2 *p1 = head;
 
-    //     settextstyle(50, 0, "黑体");
-    //     outtextxy(200, 200, "当前记录为空!");
-    //     return;
+    // while (p1 != NULL)
+    // {
+    //     printf("%s\t%s\n", p1->id, p1->service_name);
+    //     p1 = p1->next;
     // }
 
-    // for (int q = 1; q <= NowStudentNums; q++)
-    // {
+    // // 如果为空就不往下执行;/
+    if (Nums == 0)
+    {
 
-    //     // 顺序
-    //     settextstyle(30, 0, "黑体");
-    //     char Nums[5];
-    //     sprintf(Nums, "%d", q);
+        settextstyle(50, 0, "黑体");
+        outtextxy(200, 200, "当前记录为空!");
+        return;
+    }
+    for (int q = 1; q <= Nums; q++)
+    {
 
-    //     // 缩放字体
-    //     settextstyle(25, 0, "黑体");
-    //     // 学号
+        // 顺序
+        settextstyle(30, 0, "黑体");
 
-    //     outtextxy(80, 40 + 40 * q, StuArry[q - 1].s_Num);
-    //     // 姓名
-    //     outtextxy(200, 40 + 40 * q, StuArry[q - 1].s_Name);
-    //     // 语文成绩
-    //     outtextxy(300, 40 + 40 * q, StuArry[q - 1].s_Chinese);
-    //     // 数学成绩
-    //     outtextxy(400, 40 + 40 * q, StuArry[q - 1].s_Math);
-    //     // 英语成绩
-    //     outtextxy(500, 40 + 40 * q, StuArry[q - 1].s_English);
-    //     // 输出总分
-    //     if (strlen(StuArry[q - 1].s_Name) != 0)
-    //     {
-    //         outtextxy(0, 40 + 40 * q, Nums);
-    //         char SuSo[20];
-    //         sprintf(SuSo, "%.2f", StuArry[q - 1].s_SumScore); // 小数点后保留两位
-    //         outtextxy(600, 40 + 40 * q, SuSo);
-    //     }
-    // }
+        // id
+        outtextxy(0, 40 + 40 * q, head[q - 1].id);
+        // service_name
+        outtextxy(50, 40 + 40 * q, head[q - 1].service_name);
+        // danpan_id
+        outtextxy(250, 40 + 40 * q, head[q - 1].danpan_id);
+        // man
+        outtextxy(400, 40 + 40 * q, head[q - 1].man);
+        // price
+        outtextxy(500, 40 + 40 * q, head[q - 1].price);
+        // time
+        outtextxy(600, 40 + 40 * q, head[q - 1].time);
+        //       outtextxy(0, 0, "id");
+        // outtextxy(50, 0, "servise_name");
+        // outtextxy(250, 0, "danpan_id");
+        // outtextxy(400, 0, "man");
+        // outtextxy(500, 0, "price");
+        // outtextxy(600, 0, "time");
+        // if (strlen(StuArry[q - 1].s_Name) != 0)
+        // {
+        //     outtextxy(0, 40 + 40 * q, Nums);
+        //     char SuSo[20];
+        //     sprintf(SuSo, "%.2f", StuArry[q - 1].s_SumScore); // 小数点后保留两位
+        //     outtextxy(600, 40 + 40 * q, SuSo);
+        // }
+    }
 }
